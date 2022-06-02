@@ -7,8 +7,9 @@ import {
   SimpleGrid,
   useBoolean,
   PlacementWithLogical,
+  ButtonProps,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const defaultColors = [
   "gray.500",
@@ -27,13 +28,21 @@ export const ColorPicker = ({
   onChange,
   colors,
   defaultColor,
-  bg,
+  color,
+  pickerBg,
   placement,
   isDisabled,
+  ...props
 }: ColorPickerProps) => {
   const [isOpen, setIsOpen] = useBoolean();
   const colorPalette = colors || defaultColors;
   const [selectedColor, setSelectedColor] = useState<string>(defaultColor || colorPalette[0]);
+
+  useEffect(() => {
+    if (color) {
+      setSelectedColor(color);
+    }
+  }, [color]);
 
   return (
     <Popover
@@ -49,9 +58,10 @@ export const ColorPicker = ({
           _active={{ bg: selectedColor }}
           aria-label="color picker"
           isDisabled={isDisabled}
+          {...props}
         ></Button>
       </PopoverTrigger>
-      <PopoverContent w="auto" bg={bg} boxShadow="md">
+      <PopoverContent w="auto" bg={pickerBg} boxShadow="md">
         <PopoverArrow />
         <SimpleGrid columns={5} p={1} spacing={1}>
           {colorPalette.map((color, index) => (
@@ -77,11 +87,12 @@ export const ColorPicker = ({
   );
 };
 
-interface ColorPickerProps {
+interface ColorPickerProps extends Omit<ButtonProps, 'onChange'> {
   onChange: (value: string) => void;
   colors?: string[];
   defaultColor?: string;
-  bg?: string;
+  color?: string;
+  pickerBg?: string;
   placement?: PlacementWithLogical;
   isDisabled?: boolean;
 }
