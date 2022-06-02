@@ -52,13 +52,16 @@ var ColorPicker = function ColorPicker(_ref) {
     onClick: setIsOpen.toggle,
     _hover: {
       bg: selectedColor,
-      transform: "scale(1.05)"
+      transform: "scale(1.05)",
+      borderColor: "gray.300"
     },
     _active: {
       bg: selectedColor
     },
     "aria-label": "color picker",
-    isDisabled: isDisabled
+    isDisabled: isDisabled,
+    borderWidth: 1,
+    borderColor: "gray.200"
   }, props))), React.createElement(PopoverContent, {
     w: "auto",
     bg: pickerBg,
@@ -75,9 +78,12 @@ var ColorPicker = function ColorPicker(_ref) {
       p: 0,
       minW: "40px",
       bg: color,
+      borderWidth: 1,
+      borderColor: "gray.200",
       _hover: {
         bg: color,
-        transform: "scale(1.05)"
+        transform: "scale(1.05)",
+        borderColor: "gray.300"
       },
       _active: {
         bg: color

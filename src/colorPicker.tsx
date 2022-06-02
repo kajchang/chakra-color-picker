@@ -54,10 +54,12 @@ export const ColorPicker = ({
         <Button
           bg={selectedColor}
           onClick={setIsOpen.toggle}
-          _hover={{ bg: selectedColor, transform: "scale(1.05)" }}
+          _hover={{ bg: selectedColor, transform: "scale(1.05)", borderColor: "gray.300" }}
           _active={{ bg: selectedColor }}
           aria-label="color picker"
           isDisabled={isDisabled}
+          borderWidth={1}
+          borderColor="gray.200"
           {...props}
         ></Button>
       </PopoverTrigger>
@@ -72,7 +74,9 @@ export const ColorPicker = ({
               p={0}
               minW="40px"
               bg={color}
-              _hover={{ bg: color, transform: "scale(1.05)" }}
+              borderWidth={1}
+              borderColor="gray.200"
+              _hover={{ bg: color, transform: "scale(1.05)", borderColor: "gray.300" }}
               _active={{ bg: color }}
               onClick={() => {
                 setIsOpen.toggle();
